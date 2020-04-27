@@ -19,7 +19,8 @@ Once the quiz ends, we should should the user their score, and allow them to ent
 */
 
 var mainContent = document.querySelector('#main-content');
-
+var submitButton = document.querySelector('#submitButton');
+var timer = 300
 var qaList = [
     {
         q: 'the selector for id in css is a:',
@@ -30,7 +31,7 @@ var qaList = [
             c: '#',
             d: '*'
         },
-        correctAnswer: 'c'
+        correctAnswer: '#'
     },
     {
         q: 'the selector for class in css is:',
@@ -42,104 +43,275 @@ var qaList = [
             d: '+'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: '.'
     },
     {
-        q: 'the selector for class in css is:',
+        q: 'What tag is used to define a list item in HTML:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: '<ul>',
+            b: '<li>',
+            c: '<div>',
+            d: '<a>'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: '<li>'
     }, {
-        q: 'the selector for class in css is:',
+        q: 'What tag can be used to insert a line break or blank line in an HTML document?:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: '<hr>',
+            b: '<break>',
+            c: '<tr>',
+            d: '<br>'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: '<br>'
     },
     {
-        q: 'the selector for class in css is:',
+        q: 'which tag holds the body and head of an HTML file?:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: '<script>',
+            b: '<html>',
+            c: '<href>',
+            d: '<form>'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: '<html>'
     },
     {
-        q: 'the selector for class in css is:',
+        q: 'how many columns are in a bootstrap grid?:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: '16',
+            b: '8',
+            c: '4',
+            d: '12'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: '12'
     },
     {
-        q: 'the selector for class in css is:',
+        q: 'the container for an array is:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: '{}',
+            b: '<>',
+            c: '()',
+            d: '[]'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: '[]'
     },
     {
-        q: 'the selector for class in css is:',
+        q: 'The container for an object is:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: '<>',
+            b: '[]',
+            c: '{}',
+            d: '()'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: '{}'
     },
     {
-        q: 'the selector for class in css is:',
+        q: 'to declare a variable in javascript, you would use:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: '.variable',
+            b: '#var',
+            c: '#variable',
+            d: 'var'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: 'var'
     },
     {
-        q: 'the selector for class in css is:',
+        q: 'what is the keyboard function to comment out a line?:',
         answers:
         {
-            a: '&',
-            b: '.',
-            c: '#',
-            d: '+'
+            a: 'ctrl + c',
+            b: 'alt + v',
+            c: 'ctrl + /',
+            d: 'ctrl + z'
 
         },
-        correctAnswer: 'b'
+        correctAnswer: 'ctrl + /'
     },
 ];
-console.log(qaList)
+
+var currentQuestionCounter = 0;
+
+submitButton.addEventListener('click', loadQuestion);
+
+
+function loadQuestion() {
+    event.preventDefault;
+    console.log('the button was clicked');
+
+    // hide content 
+    var startContent = document.querySelector('.startContent');
+    startContent.style.display = 'none';
+
+    // show content 
+    var quizContent = document.querySelector('.quizContent');
+    var question = qaList[currentQuestionCounter].q;
+    var questionDOM = document.createElement('p');
+    questionDOM.innerText = question;
+    quizContent.appendChild(questionDOM);
+
+    // first answer
+    var answerA = qaList[currentQuestionCounter].answers.a;
+    var answersDOM = document.createElement('button');
+    answersDOM.addEventListener('click', function (event) {
+        event.preventDefault;
+        var correctAnswer = qaList[currentQuestionCounter].correctAnswer
+        console.log('correct Answer is ', correctAnswer);
+        console.log('Answer A is ', answerA);
+
+        var message = document.createElement('p');
+
+        if (answerA === correctAnswer) {
+            message.innerText = 'Correct';
+
+        } else {
+            // wrong message
+            message.innerText = 'Incorrect';
+            // take time off clock
+
+        };
+
+        // after button is clicked
+        // 1: update current question counter to next question
+        currentQuestionCounter++;
+        // 2: remove old question
+        document.querySelector('.quizContent').innerHTML = "";
+        // 3: call load next question func
+        loadQuestion();
+
+        quizContent.appendChild(message);
+    })
+
+    // answer is '.'
+    // answer should be "a: '.'"
+    answersDOM.innerText = 'a:  ' + answerA;
+    quizContent.appendChild(answersDOM);
+
+    // second answer
+    var answerB = qaList[currentQuestionCounter].answers.b;
+    var answersDOM = document.createElement('button');
+    answersDOM.addEventListener('click', function (event) {
+        event.preventDefault;
+        var correctAnswer = qaList[currentQuestionCounter].correctAnswer
+        console.log('correct Answer is ', correctAnswer);
+        console.log('Answer B is ', answerB);
+
+        var message = document.createElement('p');
+
+        if (answerB === correctAnswer) {
+            message.innerText = 'Correct';
+
+        } else {
+            // wrong message
+            message.innerText = 'Incorrect';
+            // take time off clock
+
+        };
+        quizContent.appendChild(message);
+
+        // after button clicked
+        // 1: update current question to next question
+        currentQuestionCounter++;
+
+        // 2: call load next question func
+        document.querySelector('.quizContent').innerHTML = "";
+
+        loadQuestion();
+        quizContent.appendChild(message);
+    })
+
+    answersDOM.innerText = 'b:  ' + answerB;
+    quizContent.appendChild(answersDOM);
+
+    // third answer
+    var answerC = qaList[currentQuestionCounter].answers.c;
+    var answersDOM = document.createElement('button');
+
+    answersDOM.addEventListener('click', function (event) {
+        event.preventDefault;
+        var correctAnswer = qaList[currentQuestionCounter].correctAnswer
+
+
+
+        var message = document.createElement('p');
+
+        console.log('correct Answer is ', correctAnswer);
+        console.log('Answer C is ', answerC);
+        // ( # === c)
+        if (answerC === correctAnswer) {
+            message.innerText = 'Correct';
+
+        } else {
+            // wrong message
+            message.innerText = 'Incorrect';
+            // take time off clock
+        };
+        quizContent.appendChild(message);
+
+        // after button is clicked
+        // 1: update current question counter to next question
+        currentQuestionCounter++;
+        // 2: remove old question
+        document.querySelector('.quizContent').innerHTML = "";
+        // 3: call load next question func
+        loadQuestion();
+        quizContent.appendChild(message);
+    })
+
+    answersDOM.innerText = 'c:  ' + answerC;
+    quizContent.appendChild(answersDOM);
+
+    // fourth answer
+    var answerD = qaList[currentQuestionCounter].answers.d;
+
+
+    var answersDOM = document.createElement('button');
+    answersDOM.addEventListener('click', function (event) {
+        event.preventDefault;
+        var correctAnswer = qaList[currentQuestionCounter].correctAnswer
+
+
+
+        var message = document.createElement('p');
+
+        console.log('correct Answer is ', correctAnswer);
+        console.log('Answer D is ', answerD);
+        // ( # === d)
+        if (answerD === correctAnswer) {
+            message.innerText = 'Correct';
+
+        } else {
+            // wrong message
+            message.innerText = 'Incorrect';
+            // take time off clock
+        };
+        quizContent.appendChild(message);
+
+        // after button is clicked
+        // 1: update current question counter to next question
+        currentQuestionCounter++;
+        // 2: remove old question
+        document.querySelector('.quizContent').innerHTML = "";
+        // 3: call load next question func
+        loadQuestion();
+        quizContent.appendChild(message);
+    })
+
+    answersDOM.innerText = 'd:  ' + answerD;
+    quizContent.appendChild(answersDOM);
+
+}
 
 

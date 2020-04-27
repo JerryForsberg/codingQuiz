@@ -1,0 +1,26 @@
+body {
+    box-sizing: border-box;
+    
+}
+
+#main-content {
+    display: center;
+    text-align: center;
+    margin-right: 25%;
+    margin-left: 25%;
+    margin-top: 10%;
+    
+}
+
+p {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.quizContent > button {
+    margin: 10px;
+    display: block;
+    background-color: rgba(44, 130, 201, 0.8);
+    min-width: 100px;
+    font-size: 25px;
+}
